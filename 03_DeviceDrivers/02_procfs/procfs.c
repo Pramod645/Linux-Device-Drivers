@@ -74,7 +74,7 @@ static __exit void cleanup_proc(void)
 module_init(init_proc);
 module_exit(cleanup_proc);
 
-MODULE_AUTHOR("Ganesh Naik");
-MODULE_DESCRIPTION("Example");
+MODULE_AUTHOR ("Pramod Kumar);
+MODULE_DESCRIPTION ("Embedded Linux Device Drivers Excercise");
 MODULE_LICENSE("GPL");
 

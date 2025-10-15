@@ -91,6 +91,6 @@ static void __exit my_exit (void)
 module_exit (my_exit);
 module_init (my_init);
 
-MODULE_AUTHOR ("Ganesh Naik");
-MODULE_DESCRIPTION ("Embedded Linux Workshop, Levana Technologies, Mumbai");
+MODULE_AUTHOR ("Pramod Kumar);
+MODULE_DESCRIPTION ("Embedded Linux Device Drivers Excercise");
 MODULE_LICENSE ("GPL v2");

@@ -44,6 +44,6 @@ static void __exit my_exit (void)
 module_init (my_init);
 module_exit (my_exit);
 
-MODULE_AUTHOR ("Ganesh Naik");
-MODULE_DESCRIPTION ("Embedded Linux & Device Drivers Training");
+MODULE_AUTHOR ("Pramod Kumar);
+MODULE_DESCRIPTION ("Embedded Linux Device Drivers Excercise");
 MODULE_LICENSE ("GPL v2");

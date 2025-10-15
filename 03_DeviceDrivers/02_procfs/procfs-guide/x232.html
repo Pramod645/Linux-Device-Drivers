@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Writing data</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Linux Kernel Procfs Guide"
+HREF="book1.html"><LINK
+REL="UP"
+TITLE="Communicating with userland"
+HREF="c177.html"><LINK
+REL="PREVIOUS"
+TITLE="Communicating with userland"
+HREF="c177.html"><LINK
+REL="NEXT"
+TITLE="A single call back for many files"
+HREF="x257.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Linux Kernel Procfs Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c177.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Communicating with userland</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x257.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN232"
+></A
+>Writing data</H1
+><P
+>        The write call back function allows a userland process to write
+        data to the kernel, so it has some kind of control over the
+        kernel. The write function should have the following format:
+      </P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><A
+NAME="AEN235"
+></A
+><P
+></P
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int <TT
+CLASS="FUNCTION"
+>write_func</TT
+></CODE
+>(struct file* <TT
+CLASS="PARAMETER"
+><I
+>file</I
+></TT
+>, const char* <TT
+CLASS="PARAMETER"
+><I
+>buffer</I
+></TT
+>, unsigned long <TT
+CLASS="PARAMETER"
+><I
+>count</I
+></TT
+>, void* <TT
+CLASS="PARAMETER"
+><I
+>data</I
+></TT
+>);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>        The write function should read <TT
+CLASS="PARAMETER"
+><I
+>count</I
+></TT
+>
+        bytes at maximum from the <TT
+CLASS="PARAMETER"
+><I
+>buffer</I
+></TT
+>. Note
+        that the <TT
+CLASS="PARAMETER"
+><I
+>buffer</I
+></TT
+> doesn't live in the
+        kernel's memory space, so it should first be copied to kernel
+        space with <TT
+CLASS="FUNCTION"
+>copy_from_user</TT
+>. The
+        <TT
+CLASS="PARAMETER"
+><I
+>file</I
+></TT
+> parameter is usually
+        ignored. <A
+HREF="x257.html"
+>the Section called <I
+>A single call back for many files</I
+></A
+> shows how to use the
+        <TT
+CLASS="PARAMETER"
+><I
+>data</I
+></TT
+> parameter.
+      </P
+><P
+>        Again, <A
+HREF="c310.html"
+>the chapter called <I
+>Example</I
+></A
+> shows how to use this call back
+        function.
+      </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c177.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x257.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Communicating with userland</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c177.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>A single call back for many files</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

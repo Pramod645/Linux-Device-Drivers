@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Introduction</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Linux Kernel Procfs Guide"
+HREF="book1.html"><LINK
+REL="PREVIOUS"
+TITLE="Preface"
+HREF="f36.html"><LINK
+REL="NEXT"
+TITLE="Managing procfs entries"
+HREF="c60.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Linux Kernel Procfs Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="f36.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c60.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="INTRO"
+></A
+>Introduction</H1
+><P
+>      The <TT
+CLASS="FILENAME"
+>/proc</TT
+> file system
+      (procfs) is a special file system in the linux kernel. It's a
+      virtual file system: it is not associated with a block device
+      but exists only in memory. The files in the procfs are there to
+      allow userland programs access to certain information from the
+      kernel (like process information in <TT
+CLASS="FILENAME"
+>/proc/[0-9]+/</TT
+>), but also for debug
+      purposes (like <TT
+CLASS="FILENAME"
+>/proc/ksyms</TT
+>).
+    </P
+><P
+>      This guide describes the use of the procfs file system from
+      within the Linux kernel. It starts by introducing all relevant
+      functions to manage the files within the file system. After that
+      it shows how to communicate with userland, and some tips and
+      tricks will be pointed out. Finally a complete example will be
+      shown.
+    </P
+><P
+>      Note that the files in <TT
+CLASS="FILENAME"
+>/proc/sys</TT
+> are sysctl files: they
+      don't belong to procfs and are governed by a completely
+      different API described in the Kernel API book.
+    </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="f36.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c60.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Preface</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Managing procfs entries</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

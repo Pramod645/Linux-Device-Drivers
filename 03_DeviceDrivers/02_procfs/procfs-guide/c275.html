@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Tips and tricks</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Linux Kernel Procfs Guide"
+HREF="book1.html"><LINK
+REL="PREVIOUS"
+TITLE="A single call back for many files"
+HREF="x257.html"><LINK
+REL="NEXT"
+TITLE="Modules"
+HREF="x299.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Linux Kernel Procfs Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x257.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x299.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="TIPS"
+></A
+>Tips and tricks</H1
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="CONVENIENCE"
+></A
+>Convenience functions</H1
+><DIV
+CLASS="FUNCSYNOPSIS"
+><A
+NAME="AEN279"
+></A
+><P
+></P
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>struct proc_dir_entry* <TT
+CLASS="FUNCTION"
+>create_proc_read_entry</TT
+></CODE
+>(const char* <TT
+CLASS="PARAMETER"
+><I
+>name</I
+></TT
+>, mode_t <TT
+CLASS="PARAMETER"
+><I
+>mode</I
+></TT
+>, struct proc_dir_entry* <TT
+CLASS="PARAMETER"
+><I
+>parent</I
+></TT
+>, read_proc_t* <TT
+CLASS="PARAMETER"
+><I
+>read_proc</I
+></TT
+>, void* <TT
+CLASS="PARAMETER"
+><I
+>data</I
+></TT
+>);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>        This function creates a regular file in exactly the same way
+        as <TT
+CLASS="FUNCTION"
+>create_proc_entry</TT
+> from <A
+HREF="c60.html#REGULARFILE"
+>the Section called <I
+>Creating a regular file</I
+> in the chapter called <I
+>Managing procfs entries</I
+></A
+> does, but also allows to set the read
+        function <TT
+CLASS="PARAMETER"
+><I
+>read_proc</I
+></TT
+> in one call. This
+        function can set the <TT
+CLASS="PARAMETER"
+><I
+>data</I
+></TT
+> as well, like
+        explained in <A
+HREF="x257.html"
+>the Section called <I
+>A single call back for many files</I
+> in the chapter called <I
+>Communicating with userland</I
+></A
+>.
+      </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x257.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x299.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>A single call back for many files</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Modules</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

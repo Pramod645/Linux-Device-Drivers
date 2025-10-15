@@ -1,0 +1,8 @@
+
+menu "SIMPLE DRIVER"
+config SIMPLE
+	tristate "simple driver"
+	---help---
+	this is a simple export module
+endmenu
+

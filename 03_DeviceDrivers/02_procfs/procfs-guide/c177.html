@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Communicating with userland</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Linux Kernel Procfs Guide"
+HREF="book1.html"><LINK
+REL="PREVIOUS"
+TITLE="Removing an entry"
+HREF="x155.html"><LINK
+REL="NEXT"
+TITLE="Writing data"
+HREF="x232.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Linux Kernel Procfs Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x155.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x232.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="USERLAND"
+></A
+>Communicating with userland</H1
+><P
+>       Instead of reading (or writing) information directly from
+       kernel memory, procfs works with <I
+CLASS="EMPHASIS"
+>call back
+       functions</I
+> for files: functions that are called when
+       a specific file is being read or written. Such functions have
+       to be initialised after the procfs file is created by setting
+       the <TT
+CLASS="STRUCTFIELD"
+><I
+>read_proc</I
+></TT
+> and/or
+       <TT
+CLASS="STRUCTFIELD"
+><I
+>write_proc</I
+></TT
+> fields in the
+       <SPAN
+CLASS="STRUCTNAME"
+>struct proc_dir_entry*</SPAN
+> that the
+       function <TT
+CLASS="FUNCTION"
+>create_proc_entry</TT
+> returned:
+    </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>struct proc_dir_entry* entry;
+
+entry-&#62;read_proc = read_proc_foo;
+entry-&#62;write_proc = write_proc_foo;
+    </PRE
+></TD
+></TR
+></TABLE
+><P
+>      If you only want to use a the
+      <TT
+CLASS="STRUCTFIELD"
+><I
+>read_proc</I
+></TT
+>, the function
+      <TT
+CLASS="FUNCTION"
+>create_proc_read_entry</TT
+> described in <A
+HREF="c275.html#CONVENIENCE"
+>the Section called <I
+>Convenience functions</I
+> in the chapter called <I
+>Tips and tricks</I
+></A
+> may be used to create and initialise the
+      procfs entry in one single call.
+    </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN190"
+></A
+>Reading data</H1
+><P
+>        The read function is a call back function that allows userland
+        processes to read data from the kernel. The read function
+        should have the following format:
+      </P
+><DIV
+CLASS="FUNCSYNOPSIS"
+><A
+NAME="AEN193"
+></A
+><P
+></P
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>int <TT
+CLASS="FUNCTION"
+>read_func</TT
+></CODE
+>(char* <TT
+CLASS="PARAMETER"
+><I
+>page</I
+></TT
+>, char** <TT
+CLASS="PARAMETER"
+><I
+>start</I
+></TT
+>, off_t <TT
+CLASS="PARAMETER"
+><I
+>off</I
+></TT
+>, int <TT
+CLASS="PARAMETER"
+><I
+>count</I
+></TT
+>, int* <TT
+CLASS="PARAMETER"
+><I
+>eof</I
+></TT
+>, void* <TT
+CLASS="PARAMETER"
+><I
+>data</I
+></TT
+>);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>        The read function should write its information into the
+        <TT
+CLASS="PARAMETER"
+><I
+>page</I
+></TT
+>. For proper use, the function
+        should start writing at an offset of
+        <TT
+CLASS="PARAMETER"
+><I
+>off</I
+></TT
+> in <TT
+CLASS="PARAMETER"
+><I
+>page</I
+></TT
+> and
+        write at most <TT
+CLASS="PARAMETER"
+><I
+>count</I
+></TT
+> bytes, but because
+        most read functions are quite simple and only return a small
+        amount of information, these two parameters are usually
+        ignored (it breaks pagers like <TT
+CLASS="LITERAL"
+>more</TT
+> and
+        <TT
+CLASS="LITERAL"
+>less</TT
+>, but <TT
+CLASS="LITERAL"
+>cat</TT
+> still
+        works).
+      </P
+><P
+>        If the <TT
+CLASS="PARAMETER"
+><I
+>off</I
+></TT
+> and
+        <TT
+CLASS="PARAMETER"
+><I
+>count</I
+></TT
+> parameters are properly used,
+        <TT
+CLASS="PARAMETER"
+><I
+>eof</I
+></TT
+> should be used to signal that the
+        end of the file has been reached by writing
+        <TT
+CLASS="LITERAL"
+>1</TT
+> to the memory location
+        <TT
+CLASS="PARAMETER"
+><I
+>eof</I
+></TT
+> points to.
+      </P
+><P
+>        The parameter <TT
+CLASS="PARAMETER"
+><I
+>start</I
+></TT
+> doesn't seem to be
+        used anywhere in the kernel. The <TT
+CLASS="PARAMETER"
+><I
+>data</I
+></TT
+>
+        parameter can be used to create a single call back function for
+        several files, see <A
+HREF="x257.html"
+>the Section called <I
+>A single call back for many files</I
+></A
+>.
+      </P
+><P
+>        The <TT
+CLASS="FUNCTION"
+>read_func</TT
+> function must return the
+        number of bytes written into the <TT
+CLASS="PARAMETER"
+><I
+>page</I
+></TT
+>.
+      </P
+><P
+>        <A
+HREF="c310.html"
+>the chapter called <I
+>Example</I
+></A
+> shows how to use a read call back
+        function.
+      </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x155.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x232.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Removing an entry</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Writing data</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Creating a device</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Linux Kernel Procfs Guide"
+HREF="book1.html"><LINK
+REL="UP"
+TITLE="Managing procfs entries"
+HREF="c60.html"><LINK
+REL="PREVIOUS"
+TITLE="Creating a symlink"
+HREF="x94.html"><LINK
+REL="NEXT"
+TITLE="Creating a directory"
+HREF="x142.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Linux Kernel Procfs Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x94.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Managing procfs entries</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x142.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN113"
+></A
+>Creating a device</H1
+><DIV
+CLASS="FUNCSYNOPSIS"
+><A
+NAME="AEN115"
+></A
+><P
+></P
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>struct proc_dir_entry* <TT
+CLASS="FUNCTION"
+>proc_mknod</TT
+></CODE
+>(const char* <TT
+CLASS="PARAMETER"
+><I
+>name</I
+></TT
+>, mode_t <TT
+CLASS="PARAMETER"
+><I
+>mode</I
+></TT
+>, struct proc_dir_entry* <TT
+CLASS="PARAMETER"
+><I
+>parent</I
+></TT
+>, kdev_t <TT
+CLASS="PARAMETER"
+><I
+>rdev</I
+></TT
+>);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>        Creates a device file <TT
+CLASS="PARAMETER"
+><I
+>name</I
+></TT
+> with mode
+        <TT
+CLASS="PARAMETER"
+><I
+>mode</I
+></TT
+> in the procfs directory
+        <TT
+CLASS="PARAMETER"
+><I
+>parent</I
+></TT
+>. The device file will work on
+        the device <TT
+CLASS="PARAMETER"
+><I
+>rdev</I
+></TT
+>, which can be generated
+        by using the <TT
+CLASS="LITERAL"
+>MKDEV</TT
+> macro from
+        <TT
+CLASS="LITERAL"
+>linux/kdev_t.h</TT
+>. The
+        <TT
+CLASS="PARAMETER"
+><I
+>mode</I
+></TT
+> parameter
+        <I
+CLASS="EMPHASIS"
+>must</I
+> contain <TT
+CLASS="CONSTANT"
+>S_IFBLK</TT
+>
+        or <TT
+CLASS="CONSTANT"
+>S_IFCHR</TT
+> to create a device
+        node. Compare with userland <TT
+CLASS="LITERAL"
+>mknod
+        --mode=</TT
+><TT
+CLASS="PARAMETER"
+><I
+>mode</I
+></TT
+>
+        <TT
+CLASS="PARAMETER"
+><I
+>name</I
+></TT
+> <TT
+CLASS="PARAMETER"
+><I
+>rdev</I
+></TT
+>.
+      </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x94.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x142.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Creating a symlink</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c60.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Creating a directory</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

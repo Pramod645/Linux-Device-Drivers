@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Managing procfs entries</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Linux Kernel Procfs Guide"
+HREF="book1.html"><LINK
+REL="PREVIOUS"
+TITLE="Introduction"
+HREF="c51.html"><LINK
+REL="NEXT"
+TITLE="Creating a symlink"
+HREF="x94.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Linux Kernel Procfs Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c51.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x94.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="MANAGING"
+></A
+>Managing procfs entries</H1
+><P
+>      This chapter describes the functions that various kernel
+      components use to populate the procfs with files, symlinks,
+      device nodes, and directories.
+    </P
+><P
+>      A minor note before we start: if you want to use any of the
+      procfs functions, be sure to include the correct header file! 
+      This should be one of the first lines in your code:
+    </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>#include &#60;linux/proc_fs.h&#62;
+    </PRE
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="REGULARFILE"
+></A
+>Creating a regular file</H1
+><DIV
+CLASS="FUNCSYNOPSIS"
+><A
+NAME="AEN67"
+></A
+><P
+></P
+><P
+><CODE
+><CODE
+CLASS="FUNCDEF"
+>struct proc_dir_entry* <TT
+CLASS="FUNCTION"
+>create_proc_entry</TT
+></CODE
+>(const char* <TT
+CLASS="PARAMETER"
+><I
+>name</I
+></TT
+>, mode_t <TT
+CLASS="PARAMETER"
+><I
+>mode</I
+></TT
+>, struct proc_dir_entry* <TT
+CLASS="PARAMETER"
+><I
+>parent</I
+></TT
+>);</CODE
+></P
+><P
+></P
+></DIV
+><P
+>        This function creates a regular file with the name
+        <TT
+CLASS="PARAMETER"
+><I
+>name</I
+></TT
+>, file mode
+        <TT
+CLASS="PARAMETER"
+><I
+>mode</I
+></TT
+> in the directory
+        <TT
+CLASS="PARAMETER"
+><I
+>parent</I
+></TT
+>. To create a file in the root of
+        the procfs, use <TT
+CLASS="CONSTANT"
+>NULL</TT
+> as
+        <TT
+CLASS="PARAMETER"
+><I
+>parent</I
+></TT
+> parameter. When successful, the
+        function will return a pointer to the freshly created
+        <SPAN
+CLASS="STRUCTNAME"
+>struct proc_dir_entry</SPAN
+>; otherwise it
+        will return <TT
+CLASS="CONSTANT"
+>NULL</TT
+>. <A
+HREF="c177.html"
+>the chapter called <I
+>Communicating with userland</I
+></A
+> describes how to do something useful with
+        regular files.
+      </P
+><P
+>        Note that it is specifically supported that you can pass a
+        path that spans multiple directories. For example
+        <TT
+CLASS="FUNCTION"
+>create_proc_entry</TT
+>(<TT
+CLASS="PARAMETER"
+><I
+>"drivers/via0/info"</I
+></TT
+>)
+        will create the <TT
+CLASS="FILENAME"
+>via0</TT
+>
+        directory if necessary, with standard
+        <TT
+CLASS="CONSTANT"
+>0755</TT
+> permissions.
+      </P
+><P
+>      If you only want to be able to read the file, the function
+      <TT
+CLASS="FUNCTION"
+>create_proc_read_entry</TT
+> described in <A
+HREF="c275.html#CONVENIENCE"
+>the Section called <I
+>Convenience functions</I
+> in the chapter called <I
+>Tips and tricks</I
+></A
+> may be used to create and initialise
+      the procfs entry in one single call.
+    </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c51.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x94.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Introduction</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Creating a symlink</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
